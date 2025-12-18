@@ -1,0 +1,372 @@
+/* ============================================================
+   CSS RESET & BASE STYLES
+   ============================================================ */
+
+/* Universal selector (*) applies to ALL elements on the page */
+* {
+    /* box-sizing: border-box makes width/height include padding and border
+       Without it: width: 100px + padding: 20px = 120px total
+       With it: width: 100px includes the padding = 100px total
+       This makes sizing much more predictable! */
+    box-sizing: border-box;
+
+    /* Remove default margins and padding that browsers add to elements
+       This creates a consistent starting point across all browsers */
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ============================================================
+   BODY STYLES
+   ============================================================ */
+body {
+    /* min-height ensures body is at least full viewport height
+       100vh = 100% of Viewport Height */
+    min-height: 100vh;
+
+    /* LINEAR GRADIENT creates smooth color transitions
+       Syntax: linear-gradient(angle, color1 stop1, color2 stop2, ...)
+       135deg = diagonal from top-left to bottom-right
+       The percentages (0%, 50%, 100%) define where each color is positioned */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+
+    /* FONT STACK - browser tries each font in order
+       If first isn't available, it tries the next one
+       'sans-serif' at the end is a generic fallback */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+
+    /* Text color using hex code
+       Tip: Use online contrast checkers to ensure readability */
+    color: #2d3748;
+
+    padding: 20px;
+
+    /* line-height controls spacing between lines of text
+       1.6 means 160% of the font size - good for readability */
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   FORM INPUT STYLES
+   ============================================================ */
+
+/* Multiple selectors separated by comma apply same styles to both */
+input,
+select {
+    padding: 12px 16px;  /* Shorthand: vertical horizontal */
+
+    /* RGBA allows transparency - the last value (0.3) is alpha/opacity
+       0 = fully transparent, 1 = fully opaque */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    /* border-radius rounds corners
+       Higher values = more rounded (12px here creates soft corners) */
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.9);  /* 90% opaque white */
+    font-size: 14px;
+    color: #2d3748;
+
+    /* TRANSITION creates smooth animation when properties change
+       Syntax: property duration timing-function
+       'all' means any property change will animate
+       0.3s = animation takes 0.3 seconds
+       'ease' = starts slow, speeds up, then slows down */
+    transition: all 0.3s ease;
+
+    /* Remove the default blue outline browsers add on focus */
+    outline: none;
+}
+
+/* PSEUDO-CLASS :focus applies when element is focused (clicked/tabbed into)
+   Comma separates multiple selectors getting same styles */
+input:focus,
+select:focus {
+    border-color: #667eea;
+
+    /* box-shadow adds shadow effects
+       Syntax: x-offset y-offset blur spread color
+       0 0 0 4px = no offset, no blur, 4px spread = solid ring around element */
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+
+    background: #fff;
+}
+
+/* PSEUDO-ELEMENT ::placeholder styles the placeholder text
+   Note: ::placeholder (double colon) for pseudo-elements
+         :focus (single colon) for pseudo-classes */
+input::placeholder {
+    color: #a0aec0;  /* Light gray - less prominent than actual input text */
+}
+
+label {
+    font-weight: 600;  /* Semi-bold (400 is normal, 700 is bold) */
+    color: #fff;
+
+    /* text-shadow adds shadow to text for better readability on gradients
+       Syntax: x-offset y-offset blur color */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+    margin-right: 8px;
+}
+
+
+/* ============================================================
+   BUTTON STYLES
+   ============================================================ */
+button {
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: none;  /* Remove default button border */
+
+    /* Gradient background for modern look */
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+
+    /* letter-spacing adds space between letters */
+    letter-spacing: 0.5px;
+
+    /* Box shadow creates depth - makes button appear elevated
+       Multiple values: x y blur spread color */
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+
+    transition: all 0.3s ease;
+}
+
+/* :hover pseudo-class applies when mouse is over the element */
+button:hover {
+    cursor: pointer;  /* Changes cursor to hand pointer */
+
+    /* Different gradient on hover for feedback */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    /* TRANSFORM moves/scales/rotates elements
+       translateY(-2px) = move up 2 pixels
+       scale(1.02) = increase size by 2% */
+    transform: translateY(-2px) scale(1.02);
+
+    /* Larger, more spread shadow on hover = appears to lift up */
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+/* :active pseudo-class applies while element is being clicked */
+button:active {
+    /* Pressing down effect - moves back down and slightly shrinks */
+    transform: translateY(0) scale(0.98);
+}
+
+
+/* ============================================================
+   BOOK FORM CONTAINER - FLEXBOX LAYOUT
+   ============================================================ */
+.bookFormContainer {
+    padding: 24px 32px;
+
+    /* margin: 0 auto centers the element horizontally
+       'auto' on left and right distributes remaining space equally */
+    margin: 0 auto 24px auto;
+
+    max-width: 1200px;  /* Limits width on large screens */
+
+    /* FLEXBOX - display: flex enables flexible box layout
+       Makes direct children flex items that can be arranged easily */
+    display: flex;
+
+    /* justify-content controls horizontal alignment of flex items
+       space-between: items spread out with equal space between them */
+    justify-content: space-between;
+
+    /* align-items controls vertical alignment of flex items
+       center: items centered vertically within container */
+    align-items: center;
+
+    /* flex-wrap allows items to wrap to next line if they don't fit */
+    flex-wrap: wrap;
+
+    /* gap adds space between flex items (cleaner than margins) */
+    gap: 16px;
+
+    /* GLASSMORPHISM EFFECT - modern frosted glass look */
+    background: rgba(255, 255, 255, 0.25);  /* Semi-transparent white */
+
+    /* backdrop-filter applies effects to area BEHIND the element
+       blur(10px) creates the frosted glass effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);  /* Safari support */
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);  /* Subtle border */
+
+    /* Shadow adds depth and separation from background */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ============================================================
+   SORT BUTTON CONTAINER
+   ============================================================ */
+.sortButtonContainer {
+    display: flex;
+    justify-content: center;  /* Center items horizontally */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px;
+    margin: 0 auto 24px auto;
+    max-width: 1200px;
+
+    /* Same glassmorphism effect */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+/* ============================================================
+   BOOKS CONTAINER - CSS GRID LAYOUT
+   ============================================================ */
+#booksContainer {
+    /* CSS GRID - powerful 2D layout system */
+    display: grid;
+
+    /* grid-template-columns defines column structure
+       repeat() creates multiple columns
+       auto-fill: create as many columns as will fit
+       minmax(220px, 1fr): each column is at least 220px, max 1fr
+
+       1fr = 1 fraction of available space
+       This creates a RESPONSIVE grid without media queries! */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+    padding: 24px;
+
+    /* gap in grid works for both rows and columns */
+    gap: 24px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   BOOK CARD STYLES
+   ============================================================ */
+.bookCard {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* TRANSITION with cubic-bezier for custom animation timing
+       cubic-bezier(x1, y1, x2, y2) defines the speed curve
+       These specific values create a bouncy/elastic effect */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* overflow: hidden clips content that exceeds the container
+       Useful when child elements (like images) might overflow */
+    overflow: hidden;
+}
+
+.bookCard:hover {
+    /* Lift up and slightly enlarge on hover */
+    transform: translateY(-8px) scale(1.02);
+
+    /* More prominent shadow when "elevated" */
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.bookCard img {
+    width: 100%;     /* Image fills container width */
+    height: auto;    /* Height adjusts proportionally */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.bookCard:hover img {
+    /* Subtle zoom on image when card is hovered */
+    transform: scale(1.02);
+}
+
+
+/* ============================================================
+   FORM ELEMENT STYLES (SELECT, RADIO, CHECKBOX)
+   ============================================================ */
+form {
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 28px 32px;
+
+    /* Glassmorphism effect again */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* fieldset groups related form elements together */
+fieldset {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* legend is the title/caption for a fieldset */
+legend {
+    font-weight: 700;  /* Bold */
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 0 12px;  /* Space around text within the border gap */
+}
+
+
+/* ============================================================
+   RADIO & CHECKBOX CUSTOM STYLES
+   ============================================================ */
+
+/* Attribute selector: selects inputs where type equals "radio" or "checkbox" */
+input[type="radio"],
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+
+    /* accent-color is a modern CSS property
+       It changes the color of form controls like checkboxes and radio buttons
+       Before this, styling these elements required complex workarounds! */
+    accent-color: #667eea;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   CONTAINER CHILDREN LAYOUT
+   ============================================================ */
+
+/* Selects direct children (>) that are divs
+   inside .bookFormContainer or .sortButtonContainer */
+.bookFormContainer > div,
+.sortButtonContainer > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

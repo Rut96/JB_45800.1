@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!--
+        The 'defer' attribute makes the script load AFTER the HTML is fully parsed.
+        This is important because our JavaScript needs to access DOM elements.
+        Without 'defer', the script might run before elements exist, causing errors.
+        Alternative: place <script> at the end of <body>, but 'defer' is cleaner.
+    -->
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+
+    <div class="bookFormContainer">
+
+        <div>
+            <!--
+                The 'for' attribute connects the label to the input with matching 'id'.
+                Benefits: 1) Clicking the label focuses the input (better UX)
+                         2) Screen readers can associate them (accessibility)
+            -->
+            <label for="nameBox"> Book Name: </label>
+            <!-- type="text" is the default, accepts any text input -->
+            <input type="text" id="nameBox">
+        </div>
+
+        <div>
+            <label for="priceBox"> Book Price: </label>
+            <!--
+                type="number" provides:
+                - Numeric keyboard on mobile devices
+                - Built-in validation (only numbers allowed)
+                - Increment/decrement arrows in most browsers
+            -->
+            <input type="number" id="priceBox">
+        </div>
+
+        <div>
+            <label for="imgUrlBox"> Book Img Url: </label>
+            <!--
+                type="url" provides:
+                - Basic URL format validation
+                - Appropriate keyboard on mobile (with .com button)
+            -->
+            <input type="url" id="imgUrlBox">
+        </div>
+        <button id="addBookBtn">Add Button</button>
+
+    </div>
+
+    <!--
+        ==================== SORT & FILTER SECTION ====================
+        Buttons for sorting and filtering the book collection
+    -->
+    <div class="sortButtonContainer">
+        <div>
+            <button id="sortByPrice">Sort By Price</button>
+            <button id="sortByName">Sort By Name</button>
+        </div>
+
+        <div>
+            <button id="filterBtn">Filter</button>
+            <!--
+                'placeholder' shows hint text inside empty inputs.
+                It disappears when the user starts typing.
+            -->
+            <input type="number" id="filterMin" placeholder="min">
+            <input type="number" id="filterMax" placeholder="max">
+        </div>
+    </div>
+
+    <!--
+        ==================== BOOKS DISPLAY CONTAINER ====================
+        This empty div will be populated dynamically by JavaScript.
+        We use innerHTML to inject book cards here.
+    -->
+    <div id="booksContainer"></div>
+
+    
+    
+    
+    
+    <!--
+        ==================== FORM ELEMENTS DEMO SECTION ====================
+        Demonstrating different form input types: select, radio buttons, checkboxes
+    -->
+
+    <form>
+        <!--
+            SELECT DROPDOWN
+            Creates a dropdown menu with predefined options.
+            The 'value' attribute is what JavaScript receives (not the displayed text).
+        -->
+        <label for="colorSelect">Choose a color:</label>
+        <select id="colorSelect">
+            <!--
+                'disabled' prevents this option from being selected after initial load.
+                'selected' makes it the default shown option.
+                Combined: shows "Default" initially but user can't select it again.
+            -->
+            <option disabled selected>Default</option>
+            <!-- Each option's 'value' is what we get in JavaScript -->
+            <option value="yellow">Yellow</option>
+            <option value="gray">Gray</option>
+            <option value="blue">Blue</option>
+        </select>
+
+        <!--
+            RADIO BUTTONS
+            Used when user must choose exactly ONE option from a group.
+            All radio buttons with the SAME 'name' attribute form a group.
+            Selecting one automatically deselects others in the group.
+        -->
+        <fieldset>
+            <!-- 'legend' provides a caption for the fieldset group -->
+            <legend>Choose a text size:</legend>
+
+            <!--
+                The 'name="textSize"' groups these radio buttons together.
+                The 'value' is what JavaScript receives when this option is selected.
+                The 'class' allows us to select all of them in JavaScript.
+            -->
+            <label for="sizeSmall">Small:</label>
+            <input type="radio" name="textSize" value="small" class="radioSize" id="sizeSmall">
+
+            <label for="sizeMedium">Medium:</label>
+            <input type="radio" name="textSize" value="medium" class="radioSize" id="sizeMedium">
+
+            <label for="sizeLarge">Large:</label>
+            <input type="radio" name="textSize" value="large" class="radioSize" id="sizeLarge">
+
+        </fieldset>
+
+
+        <!--
+            CHECKBOXES
+            Unlike radio buttons, checkboxes allow MULTIPLE selections.
+            Each checkbox is independent - selecting one doesn't affect others.
+            Use checkboxes when: multiple options can be true simultaneously.
+            Use radio buttons when: only one option can be selected.
+        -->
+        <fieldset>
+
+            <legend>Select additional feature</legend>
+
+            <!--
+                Checkboxes don't need a shared 'name' because they're independent.
+                Each can be checked/unchecked without affecting others.
+                The 'value' attribute is what we read in JavaScript.
+            -->
+            <input type="checkbox" value="feature1" id="feature1">
+            <label for="feature1">Feature 1</label>
+
+            <input type="checkbox" value="feature2" id="feature2">
+            <label for="feature2">Feature 2</label>
+
+            <input type="checkbox" value="feature3" id="feature3">
+            <label for="feature3">Feature 3</label>
+
+            <!-- Container to display which features are selected -->
+            <div id="featureContainer"></div>
+
+        </fieldset>
+    </form>
+
+
+</body>
+
+</html>
