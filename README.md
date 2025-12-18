@@ -1,4 +1,4 @@
-# Books — Step-by-step mini app (teacher notes → student guide)
+# Books — Step-by-step mini app 
 
 > Goal (what we practice):
 > `localStorage`, `querySelector`, `filter`, `sort`, `splice`, `forEach`
